@@ -15,9 +15,18 @@
                 <div class="chip">
                    <img src="../assets/wa.png" alt="Person" width="96" height="96"> 08123456778 </div>
             </div>
+            {{msg}}
         </div>
     </div>
 </template>
+
+<script>
+export default {
+  props: {
+    msg: { String }
+  }
+}
+</script>
 
 <style>
 .chip {

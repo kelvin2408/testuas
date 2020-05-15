@@ -36,7 +36,7 @@
       </b-navbar-nav>
     </b-collapse>
     </b-navbar>
-    <router-view></router-view>
+    <router-view class="min-vh-100"></router-view>
     <Footer />
   </div>
 </template>
