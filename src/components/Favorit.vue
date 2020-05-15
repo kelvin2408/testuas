@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" >
       <!-- <h1>This is a search page</h1> -->
     <div class="row my-5">
         <center>
@@ -7,7 +7,7 @@
         </div>
         </center>
     </div>
-    <div class="row">
+    <div class="row" v-if="user.loggedIn">
         <div class="col-md-3" v-for="result in fav" :key="result.id" style="text-align: center;">
           <router-link :to="{ name: 'Detail', params: { id: result.id } }">
           <div class="card" style="width: 15rem; height: 90%;">
@@ -20,10 +20,18 @@
           </router-link>`
         </div>
     </div>
+    <b-container v-else  >
+      <div>
+          <h2>Silahkan login terlebih dahulu untuk menggunakan halaman ini</h2>
+           <img  src="../assets/stop.webp" width="360px" height="240px">
+      </div>
+    </b-container>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import firebase from 'firebase'
 const STORAGE_KEY = 'DATAFAVORIT'
 export default {
   name: 'Home',
@@ -39,8 +47,27 @@ export default {
   async created () {
     this.fav = JSON.parse(localStorage.getItem(STORAGE_KEY) || [])
     console.log(this.fav)
+  },
+  computed: {
+    ...mapGetters({
+      // map `this.user` to `this.$store.getters.user`
+      user: 'user'
+    })
+  },
+  methods: {
+    signOut () {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({
+            name: 'Login'
+          })
+        })
+    }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -89,6 +89,7 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
         .then(data => {
+          this.$router.replace({ name: 'Login' })
           data.user
             .updateProfile({
               displayName: this.form.name

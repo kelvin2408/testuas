@@ -6,14 +6,14 @@
         <div class="form-inline" style="width: 100%;">
             <div class="form-group mx-sm-2 mb-2" style="width: 100%;">
                 <input type="text" class="form-control" placeholder="Seach meals by name..." v-model="query">
+                <button type="submit" class="btn btn-primary" @click="getResult(query)">Search</button>
             </div>
-            <button type="submit" class="btn btn-primary mb-2" @click="getResult(query)">Search</button>
         </div>
         </center>
     </div>
     <div class="row">
         <div class="col-md-3" v-for="result in results" :key="result.idMeal" style="text-align: center;">
-           <button @click="addFav(result.idMeal,result.strMealThumb,result.strMeal,result.strCategory)">Favorit</button>
+           <b-button variant="primary"  style="text-align: left" @click="addFav(result.idMeal,result.strMealThumb,result.strMeal,result.strCategory)"><b-icon icon="star" /> Add Favorite</b-button>
           <router-link :to="{ name: 'Detail', params: { id: result.idMeal } }">
           <div class="card" style="width: 15rem; height: 90%;">
             <img class="card-img-top" :src="result.strMealThumb">
